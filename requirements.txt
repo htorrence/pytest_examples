@@ -1,0 +1,4 @@
+pandas
+psycopg2
+pytest
+flake8
