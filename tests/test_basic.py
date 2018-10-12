@@ -4,6 +4,25 @@ import pytest
 from pytest_examples.functions_to_test import add_col
 
 
+def test_add_col_passes_with_fixtures(df, df_with_col_d):
+    df = pd.DataFrame({
+        'col_a': ['a', 'a', 'a'],
+        'col_b': ['b', 'b', 'b'],
+        'col_c': ['c', 'c', 'c'],
+    })
+
+    actual = add_col(df, 'col_d', 'd')
+
+    expected = pd.DataFrame({
+        'col_a': ['a', 'a', 'a'],
+        'col_b': ['b', 'b', 'b'],
+        'col_c': ['c', 'c', 'c'],
+        'col_d': ['d', 'd', 'd'],
+    })
+
+    pd.testing.assert_frame_equal(actual, expected)
+
+
 @pytest.mark.usefixtures('df')
 @pytest.mark.usefixtures('df_with_col_d')
 def test_add_col_passes(df, df_with_col_d):
