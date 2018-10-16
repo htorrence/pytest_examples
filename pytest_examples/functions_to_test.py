@@ -28,12 +28,17 @@ def string_from_file(filename):
     return file_contents
 
 
-def psycopg_cursor_one_call(db_creds, table_name):
+def generate_features(db_creds, table_name):
+    
+    #  ... some setup code ...
+    
     connection = psycopg2.connect(**db_creds)
     with connection.cursor() as cursor:
-        cursor.execute('SELECT * FROM {} LIMIT 10;'.format(table_name))
+        cursor.execute('SELECT col1, col2 FROM data_table ;')
 
-
+    #  ... processing on data read from cursor ...
+    
+    
 def psycopg_cursor_two_calls(db_creds, table_name):
     connection = psycopg2.connect(**db_creds)
     with connection.cursor() as cursor:
