@@ -34,9 +34,12 @@ def generate_features(db_creds, table_name):
     
     connection = psycopg2.connect(**db_creds)
     with connection.cursor() as cursor:
-        cursor.execute('SELECT col1, col2 FROM data_table ;')
+        cursor.execute('SELECT col1, col2 FROM data_table;'
+        df = pd.DataFrame(cursor.fetchall())
 
-    #  ... processing on data read from cursor ...
+    #  ... processing on df ...
+                       
+    return features
     
     
 def psycopg_cursor_two_calls(db_creds, table_name):
