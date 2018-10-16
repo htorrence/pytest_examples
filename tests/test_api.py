@@ -5,8 +5,8 @@ import responses
 def test_cat_api_404():
     responses.add(
         responses.GET,
-        'https://cat.reactjsgirls.com/cats',
-        json={'whoops, there are no cats!'},
+        'https://cat.reactjsgirls.com/cat',
+        json='whoops, there are no cats!',
         status=404,
     )
 
@@ -16,6 +16,6 @@ def test_cat_api_200():
     responses.add(
         responses.GET,
         'https://cat.reactjsgirls.com/cat',
-        json={'cats': ['cat1']},
+        json={'cat': 'http://cat.reactjsgirls.com/images/6eb156f97b04eadbdd60c72a3a5b75f1.jpg'},
         status=200,
     )

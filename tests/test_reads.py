@@ -10,7 +10,6 @@ from pytest_examples.functions_to_test import (
 )
 
 
-@pytest.mark.usefixtures('df')
 @mock.patch('pytest_examples.functions_to_test.function_1')
 @mock.patch('pytest_examples.functions_to_test.function_2')
 @mock.patch('pytest_examples.functions_to_test.function_3')
@@ -18,7 +17,6 @@ def test_multiple_mocks(function_3_mock, function_2_mock, function_1_mock, df):
     pass
 
 
-@pytest.mark.usefixtures('df')
 @mock.patch('pytest_examples.functions_to_test.pd.read_csv')
 def test_df_from_csv_mock_function(read_csv_mock, df):
     # setup
@@ -34,7 +32,6 @@ def test_df_from_csv_mock_function(read_csv_mock, df):
     pd.testing.assert_frame_equal(actual, expected)
 
 
-@pytest.mark.usefixtures('df')
 @mock.patch.object(pd, 'read_csv')
 def test_df_from_csv_mock_method(read_csv_mock, df):
     # setup
@@ -51,7 +48,10 @@ def test_df_from_csv_mock_method(read_csv_mock, df):
 
 
 def test_string_from_file():
-    with mock.patch('builtins.open', mock.mock_open(read_data='fake_file_contents')):
+    with mock.patch(
+        'builtins.open',
+        mock.mock_open(read_data='fake_file_contents')
+    ):
         actual = string_from_file('fake_file_name.csv')
 
     expected = 'fake_file_contents'

@@ -39,3 +39,15 @@ def psycopg_cursor_two_calls(db_creds, table_name):
     with connection.cursor() as cursor:
         cursor.execute('SELECT * FROM {} LIMIT 10;'.format(table_name))
         cursor.execute('SELECT count(*) FROM {};'.format(table_name))
+
+
+def function_1():
+    print('Inside function 1')
+
+
+def function_2():
+    print('Inside function 2')
+
+
+def function_3():
+    print('Inside function 3')

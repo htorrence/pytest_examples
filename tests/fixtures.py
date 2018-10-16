@@ -1,5 +1,6 @@
 import pandas as pd
 import pytest
+from pyspark import SparkSession
 
 
 @pytest.fixture()
@@ -27,5 +28,40 @@ def db_creds():
         'host': 'fake_host',
         'dbname': 'fake_db',
         'user': 'fake_user',
-        'password': 'fake_password'
+        'password': 'fake_password',
     }
+
+
+@pytest.fixture(scope='session')
+def spark(request):
+    """
+    Creates a spark context
+
+    Parameters
+    ----------
+    request: pytest.FixtureRequest object
+        provides access to testing context
+    """
+
+    spark = (
+        SparkSession
+        .builder
+        .appName('pytest-pyspark-local-testing')
+        .master('local[2]')
+        .getOrCreate()
+    )
+
+    request.addfinalizer(lambda: spark.stop())
+
+    return spark
+
+
+@pytest.fixture()
+def spark_df(spark):
+    return spark.createDataFrame(
+        [
+            ('a', 'b', 'c', 'd'),
+            ('a', 'b', 'c', 'd')
+        ],
+        ['col_a', 'col_b', 'col_c', 'col_d']
+    )
