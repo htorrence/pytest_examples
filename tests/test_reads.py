@@ -1,5 +1,4 @@
 import pandas as pd
-import pytest
 from unittest import mock
 
 from pytest_examples.functions_to_test import (
@@ -48,10 +47,7 @@ def test_df_from_csv_mock_method(read_csv_mock, df):
 
 
 def test_string_from_file():
-    with mock.patch(
-        'builtins.open',
-        mock.mock_open(read_data='fake_file_contents')
-    ):
+    with mock.patch('builtins.open', mock.mock_open(read_data='fake_file_contents')):
         actual = string_from_file('fake_file_name.csv')
 
     expected = 'fake_file_contents'
