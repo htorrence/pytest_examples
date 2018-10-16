@@ -58,7 +58,6 @@ def test_string_from_file():
     assert actual == expected
 
 
-@pytest.mark.usefixtures('db_creds')
 def test_psychopg_cursor_one_call(db_creds):
     with mock.patch('psycopg2.connect') as mock_connect:
         psycopg_cursor_one_call(db_creds, 'fake_table')
@@ -68,7 +67,6 @@ def test_psychopg_cursor_one_call(db_creds):
     )
 
 
-@pytest.mark.usefixtures('db_creds')
 def test_psychopg_cursor_two_calls(db_creds):
     with mock.patch('psycopg2.connect') as mock_connect:
         psycopg_cursor_two_calls(db_creds, 'fake_table')
