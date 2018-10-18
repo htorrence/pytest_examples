@@ -21,4 +21,4 @@ Testing tools used in these examples:
 [responses](https://github.com/getsentry/responses)  
 
 
-If you're new to unit testing or want to learn more about mocking in particular, I've collected a list of blog posts and other reading I've found useful at [bitly.com/pytest_reading](bitly.com/pytest_reading).
+If you're new to unit testing or want to learn more about mocking in particular, I've collected a list of blog posts and other reading I've found useful at [bitly.com/pytest_reading](https://bitly.com/pytest_reading).
