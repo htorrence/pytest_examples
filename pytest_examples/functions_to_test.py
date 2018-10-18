@@ -26,7 +26,7 @@ def string_from_file(filename):
     return file_contents
 
 
-def generate_features(db_creds, table_name):
+def generate_features(db_creds):
     
     #  ... some setup code ...
     
