@@ -13,6 +13,7 @@ Unlike most packages, the core of this repo is under `tests/`. The functions in 
 Everything in this package is fully runnable, so you can clone or fork the repo and play around. In and of itself the code here does not do anything particularly interesting, but serves as a reference for quickly remembering/learning how to execute certain patterns in unit testing.
 
 
+## References
 Testing tools used in these examples:
 
 [pytest](https://docs.pytest.org/en/latest/)  
