@@ -57,14 +57,15 @@ def test_string_from_file():
     expected = 'fake_file_contents'
     assert actual == expected
 
-
-def test_generate_features(db_creds):
-    with mock.patch('psycopg2.connect') as mock_connect:
-        actual_features = generate_features(db_creds)
-
-    mock_connect().cursor().__enter__().execute.assert_called_with(
-        'SELECT * FROM fake_table LIMIT 10;'
-    )
+   
+@mock.patch('pytest_examples.functions_to_test.sqlalchemy.create_engine')
+@mock.patch('pytest_examples.functions_to_test.pd.read_sql')
+def test_generate_features(read_sql_mock, engine_mock, db_creds, df):
+    read_sql_mock.return_value = df
+    
+    actual_features = generate_features(db_creds)
+    
+    pd.testing.assert_frame_equal(actual_features, df)
 
 
 def test_psychopg_cursor_two_calls(db_creds):
