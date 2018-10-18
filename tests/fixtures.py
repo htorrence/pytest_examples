@@ -23,6 +23,15 @@ def df_with_col_d():
 
 
 @pytest.fixture()
+def numeric_df():
+    return pd.DataFrame({
+        'col_1': [.1, .2, .3, .4],
+        'col_2': [.1, .2, .3, .4],
+        'col_3': [.1, .2, .3, .4],
+    })
+
+
+@pytest.fixture()
 def db_creds():
     return {
         'host': 'fake_host',

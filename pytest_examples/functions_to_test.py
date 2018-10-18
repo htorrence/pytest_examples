@@ -2,6 +2,7 @@
 This file contains a set of functions to demonstrate different actions
 a data scientist might take.
 """
+import datadog
 import pandas as pd
 import psycopg2
 
@@ -51,3 +52,18 @@ def function_2():
 
 def function_3():
     print('Inside function 3')
+
+
+def initialize_datadog_wrong_args():
+    # these are the wrong argument names! sadly not caught by spec...
+    datadog.initialize(key='fake_api_key', host='fake_host')
+
+
+def initialize_datadog_wrong_call():
+    # these are the wrong argument names!
+    datadog.init(api_key='fake_api_key', app_key='fake_app_key', host_name='fake_host')
+
+
+def initialize_datadog():
+    # these are the correct argument names
+    datadog.initialize(api_key='fake_api_key', app_key='fake_app_key', host_name='fake_host')

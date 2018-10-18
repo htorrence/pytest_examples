@@ -1,8 +1,11 @@
 import pandas as pd
+import pytest
 from unittest import mock
 
 from pytest_examples.functions_to_test import (
     df_from_csv,
+    initialize_datadog_wrong_args,
+    initialize_datadog_wrong_call,
     string_from_file,
     psycopg_cursor_one_call,
     psycopg_cursor_two_calls,
@@ -71,3 +74,32 @@ def test_psychopg_cursor_two_calls(db_creds):
         mock.call('SELECT * FROM fake_table LIMIT 10;'),
         mock.call('SELECT count(*) FROM fake_table;'),
     ])
+
+
+@mock.patch('pytest_examples.functions_to_test.datadog')
+def test_initialize_datadog_wrong_args_no_autospec(datadog_mock):
+    # passes even though it's wrong!
+    initialize_datadog_wrong_args()
+    datadog_mock.initialize.assert_called_with(
+        key='fake_api_key',
+        host='fake_host'
+    )
+
+
+@mock.patch('pytest_examples.functions_to_test.datadog', autospec=True)
+def test_initialize_datadog_wrong_args_autospec(datadog_mock):
+    # passes even though it's wrong!
+    initialize_datadog_wrong_args()
+    datadog_mock.initialize.assert_called_with(
+        key='fake_api_key',
+        host='fake_host'
+    )
+
+
+@mock.patch('pytest_examples.functions_to_test.datadog.initialize', autospec=True)
+def test_initialize_datadog_wrong_call_autospec(init_mock):
+    try:
+        # this throws and exception, as desired!
+        initialize_datadog_wrong_call()
+    except AttributeError:
+        pass
