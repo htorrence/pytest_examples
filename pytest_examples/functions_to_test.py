@@ -30,10 +30,8 @@ def generate_features(db_creds):
     
     #  ... some setup code ...
     
-    connection = psycopg2.connect(**db_creds)
-    with connection.cursor() as cursor:
-        cursor.execute('SELECT col1, col2 FROM data_table;'
-        df = pd.DataFrame(cursor.fetchall())
+    eng = sqlalchemy.create_engine('fake_connection_string')
+    df = pd.read_sql('SELECT col1, col2 FROM data_table;',con=eng)
 
     #  ... processing on df ...
                        
