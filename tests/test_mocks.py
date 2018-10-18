@@ -99,7 +99,7 @@ def test_initialize_datadog_wrong_args_autospec(datadog_mock):
 @mock.patch('pytest_examples.functions_to_test.datadog.initialize', autospec=True)
 def test_initialize_datadog_wrong_call_autospec(init_mock):
     try:
-        # this throws and exception, as desired!
+        # this throws an exception, as desired!
         initialize_datadog_wrong_call()
     except AttributeError:
         pass
