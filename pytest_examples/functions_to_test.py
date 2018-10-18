@@ -7,12 +7,10 @@ import psycopg2
 
 
 def add_col(df, new_col_name, default_value):
-    """Add a new column to the given dataframe with a default value"""
-    if new_col_name in df.columns:
-        raise ValueError('column already exists')
-
+    """Add a new column with a default value"""
+    
     df[new_col_name] = default_value
-
+    
     return df
 
 
