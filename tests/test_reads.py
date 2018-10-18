@@ -58,9 +58,9 @@ def test_string_from_file():
     assert actual == expected
 
 
-def test_psychopg_cursor_one_call(db_creds):
+def test_generate_features(db_creds):
     with mock.patch('psycopg2.connect') as mock_connect:
-        psycopg_cursor_one_call(db_creds, 'fake_table')
+        actual_features = generate_features(db_creds)
 
     mock_connect().cursor().__enter__().execute.assert_called_with(
         'SELECT * FROM fake_table LIMIT 10;'
